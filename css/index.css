@@ -1,5 +1,29 @@
 main {
-    width: 100%;
-    height: 70vh;
-    background-color: whitesmoke;
+    grid-area: main;
+    width: auto;
+    height: 77.5vh;
+    background-color: rgba(220, 117, 20, 0.397);
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+}
+
+main section {
+    width: 85%;
+    height: 90%;
+    background-color: rgba(1, 32, 116, 0.466);
+    display: flex;
+    flex-flow: column wrap;
+}
+
+main section:first-child {
+    grid-column: 1 / 4;
+}
+
+main section div {
+    display: flex;
+    flex-flow: row wrap;
 }
