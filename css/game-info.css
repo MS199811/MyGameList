@@ -1,0 +1,80 @@
+#container {
+    grid-template-areas: 
+    'header'
+    'main'
+    'footer';
+}
+
+main {
+    grid-area: main;
+    width: 100%;
+    height: 77.5vh;
+    background-color: rgba(0, 255, 255, 0.158);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/* OVERLAY */
+
+main #block1, main #block2 {
+    background-color: #fd9c427e;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+main #block1 {
+    width: 100%;
+    height: 70%;
+    margin: 1rem 0rem;
+    justify-content: space-around;
+}
+
+main #block2 {
+    width: 90%;
+    height: 30%;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* GAME INFO BLOCKS */
+
+main div section:first-child {
+    align-self: flex-start;
+}
+
+main div section:first-child a i {
+    background-color: rgba(0, 0, 255, 0.356);
+    font-size: 2rem;
+    padding: 1rem;
+}
+
+main #block1 #game-media, main #block1 #game-info {
+    height: 95%;
+    background-color: #29df2954;
+}
+
+main #block1 #game-media {
+    width: 30%;
+}
+
+main #block1 #game-info {
+    width: 50%;
+}
+
+/* GAME SELECTION WHEEL */
+
+main #block2 {
+    margin-bottom: 1rem;
+}
+main #block2 .game {
+    width: 7.5%;
+    height: 80%;
+    background-color: rgba(139, 0, 139, 0.349);
+}
+
+main #block2 .game:nth-child(4) {
+    height: 100%;
+}

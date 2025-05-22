@@ -12,7 +12,7 @@
             <section>
                 <h2>Login</h2>
                 <form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
-                    <label for="login-username">Username: </label>
+                    <label for="log-name">Username: </label>
                     <input type="text" name="login-username" id="login-username">
 
                     <label for="login-password">Password: </label>
@@ -27,9 +27,19 @@
             <section>
                 <h2>Registration</h2>
                 <form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
-                    <label for=""></label>
+                    <label for="reg-name">Username:</label>
                     <input type="text">
 
+                    <label for="reg-email">E-Mail:</label>
+                    <input type="email">
+
+                    <label for="reg-password">Password:</label>
+                    <input type="text">
+
+                    <label for="reg-password">Repeat Password:</label>
+                    <input type="text">
+
+                    <input type="submit" name="registration" value="Send">
                 </form>
             </section>
         </main>
