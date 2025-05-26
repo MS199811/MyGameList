@@ -25,4 +25,4 @@
         <?php include_once("includes/footer.html") ?>
     </div>
 </body>
-</html
+</html>
