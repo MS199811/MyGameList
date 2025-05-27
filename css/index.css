@@ -23,7 +23,17 @@ main section:first-child {
     grid-column: 1 / 4;
 }
 
+main section:nth-child(2), main section:nth-child(3), main section:nth-child(4) {
+   justify-content: space-between;
+}
+
 main section div {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
+}
+
+main section div article {
+    padding: 0.2rem 0;
+    margin-bottom: 1rem;
+    border: 1px solid black;
 }
