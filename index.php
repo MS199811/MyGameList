@@ -10,7 +10,6 @@ require('includes/functions.php');
 <head>
    <?php include_once('includes/meta.html'); ?>
    <link rel="stylesheet" href="css/index.css">
-   <script src="js/script.js" defer></script>
 </head>
 <body>
     <div id="container">
@@ -29,24 +28,24 @@ require('includes/functions.php');
         </section>
         <section>
             <h3>Trending</h3>
-            <div id="trending">
+            <div id="trending" name="trending">
                 <?php createTrending($dbh) ?>
             </div>
-            <h4>More Trending</h4>
+            <button id="more-trending">More Trending</button>
         </section>
         <section>
             <h3>Latest</h3>
             <div id="latest">
                 <?php createLatest($dbh) ?>
             </div>
-            <h4>More Latest</h4>
+            <button id="more-latest">More Latest</button>
         </section>
         <section>
             <h3>Upcoming</h3>
             <div id="upcoming">
                 <?php createUpcoming($dbh) ?>
             </div>
-            <h4>More Upcoming</h4>
+            <button id="more-upcoming">More Upcoming</button>
         </section>
     </main>
     <?php include_once('includes/footer.html'); ?>
