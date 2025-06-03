@@ -1,9 +1,9 @@
 <?php
 
-/*require('database/connection.php');
+require('database/connection.php');
 
 require('includes/functions.php');
-*/
+
 ?>
 <!DOCTYPE html>
 <html lang="en-GB">
@@ -29,21 +29,21 @@ require('includes/functions.php');
         <section>
             <h3>Trending</h3>
             <div id="trending" name="trending">
-                <?php /*createTrending($dbh) */?>
+                <?php createTrending($dbh) ?>
             </div>
             <button id="more-trending">More Trending</button>
         </section>
         <section>
             <h3>Latest</h3>
             <div id="latest">
-                <?php /*createLatest($dbh) */?>
+                <?php createLatest($dbh) ?>
             </div>
             <button id="more-latest">More Latest</button>
         </section>
         <section>
             <h3>Upcoming</h3>
             <div id="upcoming">
-                <?php /*createUpcoming($dbh) */?>
+                <?php createUpcoming($dbh) ?>
             </div>
             <button id="more-upcoming">More Upcoming</button>
         </section>

@@ -4,7 +4,7 @@ require('../database/connection.php');
 
 /* MORE TRENDING */
 
-$moreTrending = $dbh->query("SELECT * FROM mgt_games WHERE is_trending = TRUE");
+$moreTrending = $dbh->query("SELECT * FROM mgt_games WHERE is_trending = TRUE LIMIT 10");
 
 while ($row = $moreTrending->fetch_assoc()) {
     echo '<figure>';
