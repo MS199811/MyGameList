@@ -1,4 +1,12 @@
 :root {
-    --teal: rgba(7, 217, 168, 1);
-    --iridescent: crimson;
+    --teal: #07d9a8ff;
+    --mint: #1fc39cff;
+    --zomp: #36ad90ff;
+    --zomp-2: #4e9784ff;
+    --hookers-green: #658178ff;
+    --dim-gray: #7d6c6cff;
+    --rose-taupe: #945660ff;
+    --amaranth-purple: #ac4054ff;
+    --cardinal: #c32a48ff;
+    --crimson: #db143cff;
 }

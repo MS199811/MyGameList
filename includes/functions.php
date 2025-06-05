@@ -17,7 +17,10 @@ function createTrending($dbh) {
 /* RETRIEVE LATEST RELEASED GAMES */
 
 function createLatest($dbh) {
-    $latestGames = $dbh->query("SELECT * FROM mgt_games WHERE release_date IS NOT NULL ORDER BY release_date DESC LIMIT 5");
+    $latestGames = $dbh->query("SELECT * FROM mgt_games
+    WHERE release_date < CURDATE() 
+    ORDER BY release_date DESC 
+    LIMIT 5");
 
     while ($record = $latestGames->fetch_assoc()) {
         echo '<a href="game-details.php?game_id='.$record['game_id'].'"><article class="game">';

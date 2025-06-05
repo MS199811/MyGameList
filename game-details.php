@@ -16,14 +16,20 @@ if (isset($_GET['game_id'])) {
         //var_dump($game);
         //echo '</pre>';
 
-        // Access data directly
         $gameName = $game['name'];
         $gameDescription = $game['description'];
         $gameReleaseDate = $game['release_date'];
-        $gameOnline = $game['available_online'];
-        $gameCrossplay = $game['crossplay'];
+        if ($game['available_online'] == 1) {
+            $gameOnline = 'Yes';
+        } else {
+            $gameOnline = 'No';
+        }
+        if ($game['crossplay'] == 1) {
+            $gameCrossplay = 'Yes';
+        } else {
+            $gameCrossplay = 'No';
+        }
         $gameImgSrc = $game['img_src'];
-        // and so on...
     }
 
     $stmt->close();
@@ -31,10 +37,10 @@ if (isset($_GET['game_id'])) {
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
    <?php include_once('includes/meta.html'); ?>
-   <link rel="stylesheet" href="css/game-info.css">
+   <link rel="stylesheet" href="css/game-details.css">
 </head>
 <body>
     <div id="container">
@@ -45,10 +51,36 @@ if (isset($_GET['game_id'])) {
                     <a href="index.php"><i class="fa-solid fa-angles-left"></i></a>
                 </section>
                 <section id="game-media">
-                    <img src="<?=$gameImgSrc?>" alt="<?=$gameName?> cover art">
+                    <img src="<?=$gameImgSrc ?? 'images/game-covers/no_image.jpg'?>" alt="<?=$gameName ?? 'An Image of no image available'?>">
                 </section>
                 <section id="game-info">
-                    <?=$gameDescription ?? 'Game not found.'?>
+                    <?php
+                        if ((isset($_GET['game_id'])) && (!empty($gameName))) {
+                            echo '<table>';
+                                echo '<tr>';
+                                    echo '<th colspan="2">'.$gameName.'</th>';
+                                echo '</tr>';
+                                echo '<tr>';
+                                    echo '<td>Release Date:</td>';
+                                    echo '<td>'.$gameReleaseDate.'</td>';
+                                echo '</tr>';
+                                echo '<tr>';
+                                    echo '<td>Available Online:</td>';
+                                    echo '<td>'.$gameOnline.'</td>';
+                                echo '</tr>';
+                                echo '<tr>';
+                                    echo '<td>Supports Crossplay:</td>';
+                                    echo '<td>'.$gameCrossplay.'</td>';
+                                echo '</tr>';
+                                echo '<tr>';
+                                    echo '<td>Game Description:</td>';
+                                    echo '<td>'.$gameDescription.'</td>';
+                                echo '</tr>';
+                            echo '</table>';
+                        } else {
+                            echo '<h3 style="color: red;">Game does not exist. Oof!</h3>'; 
+                        }
+                    ?>
                 </section>
             </div>
             <div id="block2">

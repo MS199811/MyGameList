@@ -13,17 +13,18 @@ main {
 main section {
     width: 85%;
     height: 90%;
-    background-color: rgba(1, 32, 116, 0.466);
+    background-image: linear-gradient(to bottom, lightgray, var(--dim-gray));
+    box-shadow: 0px 0px 10px rgb(0, 0, 0);
     display: flex;
     flex-flow: column wrap;
 }
 
-main section:first-child {
-    grid-column: 1 / 4;
-}
-
 main section:nth-child(2), main section:nth-child(3), main section:nth-child(4) {
    justify-content: space-between;
+}
+
+main section:first-child {
+    grid-column: 1 / 4;
 }
 
 main section div {

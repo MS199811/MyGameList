@@ -35,6 +35,7 @@ require('includes/functions.php');
         </section>
         <section>
             <h3>Latest</h3>
+            <hr>
             <div id="latest">
                 <?php createLatest($dbh) ?>
             </div>
