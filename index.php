@@ -10,6 +10,7 @@ require('includes/functions.php');
 <head>
    <?php include_once('includes/meta.html'); ?>
    <link rel="stylesheet" href="css/index.css">
+   <script src="js/functions.js" defer></script>
 </head>
 <body>
     <div id="container">
