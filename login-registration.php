@@ -1,10 +1,16 @@
 <?php
 
+if (session_status() === PHP_SESSION_NONE){
+    session_start();
+}
+
+require('database/connection.php');
+
 /* REGEX */
 
-$nameRegex = '/^.{1,25}/';
-$passwordRegex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10, 50}$/';
-$emailRegex = '/^.*@.*\..*$/';
+$nameRegex = '/^[a-zA-Z0-9_]{1,25}$/';
+$passwordRegex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,50}$/';
+$emailRegex = '/^[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,}$/';
 
 /* LOGIN */
 
@@ -21,6 +27,22 @@ if (isset($_POST['login'])) {
         $logPass = htmlspecialchars($_POST['log_password']);
     } else {
         $logErrors[] = 'No password';
+    }
+
+    /* Validate Login */
+    
+    if (isset($logName) && isset($logPass)) {
+        $stmtLogin = $dbh->prepare("SELECT username, password FROM mgt_user WHERE username = ?");
+        $stmtLogin->execute([$logName]);
+        $user = $stmtLogin->fetch(PDO::FETCH_ASSOC);
+        
+        if ($user && password_verify($logPass, $user['password'])) {
+            $_SESSION['loginName'] = $user['username'];
+            header("Location: index.php");
+            exit();
+        } else {
+            $logErrors[] = "Invalid username or password.";
+        }
     }
 } 
 
@@ -65,14 +87,38 @@ if (isset($_POST['registration'])) {
         $regErrors[] = 'Missing secondary password';
     }
 
-    /* Compare password */
+    /* Validate Registration Data  */
 
-    if (isset($regPass) && isset($regRptPass)) {
-        if ($regPass === $regRptPass) {
-            echo 'YEEEES';
+    if (isset($regName) && isset($regEmail) && isset($regPass) && isset($regRptPass)) {
+        /* Compare passwords */
+        if ($regPass !== $regRptPass) {
+            $regErrors[] = 'Passwords don\'t match!';    
         } else {
-            echo 'Aw hell no';
+            /* check if the email exist in the db */
+            $checkEmailStmt = $dbh->prepare("SELECT email FROM mgt_user where email = ?");
+            $checkEmailStmt->bind_param("s", $regEmail);
+            $checkEmailStmt->execute();
+            $result = $checkEmailStmt->store_result();
+            
+            if ($checkEmailStmt->num_rows > 0) {
+                $regErrors[] = "Email ID already exists";
+            } else {
+                $hashedPassword = password_hash($regPass, PASSWORD_DEFAULT);
+                $stmtRegistration = $dbh->prepare("INSERT INTO mgt_user (username, password, email) VALUES (?, ?, ?)");
+                $stmtRegistration->bind_param("sss", $regName, $hashedPassword, $regEmail);
+                if ($stmtRegistration->execute()){
+                    // Registration successful, set session variable
+                    $_SESSION['loginName'] = $regName; 
+                    header("Location: index.php");
+                    exit();
+                } else {
+                    $regErrors[] = "Error: ". $stmtRegistration->error;
+                }
+                $stmtRegistration->close();
+            }
+            $checkEmailStmt->close();
         }
+        $dbh->close();
     }
 } 
 ?>
@@ -120,15 +166,15 @@ if (isset($_POST['registration'])) {
                 <form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
                     <div>
                         <label for="reg_name">Username:</label>
-                        <input type="text" name="reg_name" id="reg_name" value="<?= $regName ?? ''?>" pattern="^.{1,25}" title="max of 25 chars">
+                        <input type="text" name="reg_name" id="reg_name" value="<?= $regName ?? ''?>" pattern="^[a-zA-Z0-9_]{1,25}$" title="max of 25 chars">
                     </div>
                     <div>
                         <label for="reg_email">E-Mail:</label>
-                        <input type="email" name="reg_email" id="reg_email" value="<?= $regEmail ?? ''?>" pattern="^.*@.*\..*$">
+                        <input type="email" name="reg_email" id="reg_email" value="<?= $regEmail ?? ''?>" pattern="^[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,}$">
                     </div>
                     <div>
                         <label for="reg_password">Password:</label>
-                        <input type="text" name="reg_password" id="reg_password" value="<?= $regPass ?? ''?>" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10, 50}$" title="10 min 50 max characters consisting of 1 Uppercase letter, 1 Lowercase Letter, 1 special character (!@#$%&) and 1 number">
+                        <input type="text" name="reg_password" id="reg_password" value="<?= $regPass ?? ''?>" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,50}$" title="8 min 50 max characters consisting of 1 Uppercase letter, 1 Lowercase Letter, 1 special character (!@#$%&) and 1 number">
                     </div>
                     <div>
                         <label for="reg_repeat_password">Repeat Password:</label>

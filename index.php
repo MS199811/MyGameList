@@ -1,5 +1,9 @@
 <?php
 
+if (session_status() === PHP_SESSION_NONE){
+    session_start();
+}
+
 require('database/connection.php');
 
 require('includes/functions.php');
@@ -20,7 +24,7 @@ require('includes/functions.php');
     </aside>
     <main>
         <section>
-            <h2>Welcome User</h2>
+            <h2>Welcome <?=$_SESSION['loginName'] ?>!</h2>
             <p>Here's a quick introduction as how to use this site.</p>
             <ul>
                 <li>- Search for games by sorting them!</li>

@@ -1,5 +1,9 @@
 <?php
 
+if (session_status() === PHP_SESSION_NONE){
+    session_start();
+}
+
 require('database/connection.php');
 
 if (isset($_GET['game_id'])) {
