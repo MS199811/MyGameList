@@ -48,7 +48,7 @@ if (isset($_GET['game_id'])) {
 </head>
 <body>
     <div id="container">
-        <?php include_once('includes/header.html'); ?>
+        <?php include_once('includes/header.php'); ?>
         <main>
             <div id="block1">
                 <section>

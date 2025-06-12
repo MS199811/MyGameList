@@ -78,6 +78,7 @@ main #block1 #game-info {
 
 main #block2 {
     margin-bottom: 1rem;
+    display: none;
 }
 main #block2 .game {
     width: 7.5%;

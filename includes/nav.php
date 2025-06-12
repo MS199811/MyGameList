@@ -23,13 +23,16 @@ $menuArray = [
 ];
 
 function createMenu(array $menuArray) {
-    $html = '<ul>';
+    $html = '<ul class="menu">';
     foreach($menuArray as $subMenu => $subMenuContent) {
-        $html .= '<li><button class="menuButton '.$subMenu.'">' . htmlspecialchars($subMenu) . '</button><ul><section>';
+        $html .= '<li class="menu-item">';
+        $html .= '<button class="menuButton">' . htmlspecialchars($subMenu) . '</button>';
+        $html .= '<ul class="submenu">';
         foreach($subMenuContent as $item) {
-            $html .= '<li><button class="button '.$item.'">' . htmlspecialchars($item) . '</button></li>';
+            $html .= '<li><button class="submenuButton">' . htmlspecialchars($item) . '</button></li>';
         }
-        $html .= '</section></ul></li>';
+        $html .= '</ul>';
+        $html .= '</li>';
     }
     $html .= '</ul>';
     return $html;

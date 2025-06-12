@@ -11,7 +11,7 @@ if (session_status() === PHP_SESSION_NONE){
 </head>
 <body>
     <div id="container">
-        <?php include_once("includes/header.html") ?>
+        <?php include_once("includes/header.php") ?>
         <main>
             <div class="block block1">
                 <section>

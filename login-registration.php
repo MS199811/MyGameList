@@ -1,10 +1,10 @@
 <?php
+require('database/connection.php');
 
 if (session_status() === PHP_SESSION_NONE){
     session_start();
 }
 
-require('database/connection.php');
 
 /* REGEX */
 
@@ -30,13 +30,20 @@ if (isset($_POST['login'])) {
     }
 
     /* Validate Login */
-    
-    if (isset($logName) && isset($logPass)) {
+
+    if (empty($logErrors)) {
         $stmtLogin = $dbh->prepare("SELECT username, password FROM mgt_user WHERE username = ?");
-        $stmtLogin->execute([$logName]);
-        $user = $stmtLogin->fetch(PDO::FETCH_ASSOC);
-        
+        if (!$stmtLogin) {
+            die("Prepare failed: " . $dbh->error);
+        }
+
+        $stmtLogin->bind_param("s", $logName);
+        $stmtLogin->execute();
+        $result = $stmtLogin->get_result();
+        $user = $result->fetch_assoc();
+
         if ($user && password_verify($logPass, $user['password'])) {
+            $_SESSION['logged'] = true;
             $_SESSION['loginName'] = $user['username'];
             header("Location: index.php");
             exit();
@@ -89,7 +96,7 @@ if (isset($_POST['registration'])) {
 
     /* Validate Registration Data  */
 
-    if (isset($regName) && isset($regEmail) && isset($regPass) && isset($regRptPass)) {
+    if (empty($regErrors)) {
         /* Compare passwords */
         if ($regPass !== $regRptPass) {
             $regErrors[] = 'Passwords don\'t match!';    
@@ -108,6 +115,7 @@ if (isset($_POST['registration'])) {
                 $stmtRegistration->bind_param("sss", $regName, $hashedPassword, $regEmail);
                 if ($stmtRegistration->execute()){
                     // Registration successful, set session variable
+                    $_SESSION['logged'] = true;
                     $_SESSION['loginName'] = $regName; 
                     header("Location: index.php");
                     exit();
@@ -130,7 +138,7 @@ if (isset($_POST['registration'])) {
 </head>
 <body>
     <div id="container">
-        <?php include_once('includes/header.html'); ?>
+        <?php include_once('includes/header.php'); ?>
         <main>
             <!-- LOGIN -->
             <section>
@@ -142,7 +150,7 @@ if (isset($_POST['registration'])) {
                     </div>
                     <div>
                         <label for="log_password">Password: </label>
-                        <input type="text" name="log_password" id="log_password" value="<?= $logPass ?? ''?>">
+                        <input type="password" name="log_password" id="log_password" value="<?= $logPass ?? ''?>">
                     </div>
                     <div>
                         <input type="submit" name="login" value="Send">
@@ -166,19 +174,19 @@ if (isset($_POST['registration'])) {
                 <form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
                     <div>
                         <label for="reg_name">Username:</label>
-                        <input type="text" name="reg_name" id="reg_name" value="<?= $regName ?? ''?>" pattern="^[a-zA-Z0-9_]{1,25}$" title="max of 25 chars">
+                        <input type="text" name="reg_name" id="reg_name" value="<?= $regName ?? ''?>" pattern="^[a-zA-Z0-9_]{1,25}$" title="Letters, numbers and underscores only">
                     </div>
                     <div>
                         <label for="reg_email">E-Mail:</label>
-                        <input type="email" name="reg_email" id="reg_email" value="<?= $regEmail ?? ''?>" pattern="^[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,}$">
+                        <input type="email" name="reg_email" id="reg_email" value="<?= $regEmail ?? ''?>" pattern="^[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,}$/">
                     </div>
                     <div>
                         <label for="reg_password">Password:</label>
-                        <input type="text" name="reg_password" id="reg_password" value="<?= $regPass ?? ''?>" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,50}$" title="8 min 50 max characters consisting of 1 Uppercase letter, 1 Lowercase Letter, 1 special character (!@#$%&) and 1 number">
+                        <input type="password" name="reg_password" id="reg_password" value="<?= $regPass ?? ''?>" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,50}$" title="8 min 50 max characters consisting of 1 Uppercase letter, 1 Lowercase Letter, 1 special character (!@#$%&) and 1 number">
                     </div>
                     <div>
                         <label for="reg_repeat_password">Repeat Password:</label>
-                        <input type="text" name="reg_repeat_password" id="reg_repeat_password" value="<?= $regRptPass ?? ''?>">
+                        <input type="password" name="reg_repeat_password" id="reg_repeat_password" value="<?= $regRptPass ?? ''?>">
                     </div>
                     <div>
                         <input type="submit" name="registration" value="Send">

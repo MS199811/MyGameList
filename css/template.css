@@ -1,33 +1,47 @@
 @font-face {
-    font-family: Quantify;
-    src: url(../fonts/Quantify.ttf);
+  font-family: Quantify;
+  src: url(../fonts/Quantify.ttf);
 }
 
 /* UNIVERSAL STYLING */
 
 * {
-    margin: 0;
-    padding: 0;
-    font-size: 18px;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
 }
 
 body {
-    background-image: radial-gradient(to bottom right, rgb(48, 48, 48), rgb(37, 37, 37));
+  background-color: rgb(255, 255, 255);
 }
 
-h1, h2, h3, h4, h5 {
-    font-family: Arial, sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: Arial, sans-serif;
 }
 
-h1 {font-size: 2.5rem}
-h2 {font-size: 2rem}
-h3 {font-size: 1.5rem}
-h4 {font-size: 1rem}
-h5 {font-size: 0.5rem}
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 1rem;
+}
+h5 {
+  font-size: 0.5rem;
+}
 
 a {
-    color: black;
+  color: black;
 }
 
 a:link {
@@ -47,113 +61,106 @@ a:active {
 }
 
 ul {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 #container {
-    width: 90vw;
-    min-height: 100vh;
-    margin: 0 auto;
-    display: grid;
-    grid-template-areas: 
-        'header header header header header header'
-        'aside main main main main main'
-        'footer footer footer footer footer footer'
-    ;
-    /*background-image: linear-gradient(to right, var(--zomp-2), white 70%, var(--amaranth-purple));*/
-    /*box-shadow: -5px 0px 20px var(--teal), 5px 0px 20px crimson;*/
+  width: 90vw;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: grid;
+  grid-template-areas:
+    "header header header header header header"
+    "aside main main main main main"
+    "footer footer footer footer footer footer";
+  /*background-image: linear-gradient(to right, var(--zomp-2), white 70%, var(--amaranth-purple));*/
+  /*box-shadow: -5px 0px 20px var(--teal), 5px 0px 20px crimson;*/
 }
 
 /* HEADER */
 
 header {
-    grid-area: header;
-    background-image: linear-gradient(90deg,var(--teal) 0%, crimson);
-    width: 100%;
-    height: 7.5vh;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
+  grid-area: header;
+  background-image: linear-gradient(90deg, var(--teal) 0%, crimson);
+  width: 100%;
+  height: 7.5vh;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
 }
 
-header a img {
-    max-width: 75%;
-    height: auto;
-    margin-top: 0.75rem;
+header > div:last-child {
+  display: flex;
+  flex-flow: row nowrap;
 }
 
-header a i {
-    font-size: 1.5rem;
-    margin-right: 2rem;
+header div a img {
+  max-width: 50%;
+  height: auto;
+}
+
+header div a i {
+  font-size: 1.5rem;
 }
 
 /* ASIDE */
 
-aside {
-    grid-area: aside;
-    width: auto;
-    height: 77.5vh;
-    display: flex;
-    flex-flow: column wrap;
-    align-items: center;
-    text-align: center;
+.menu {
+  list-style: none;
+  padding: 0;
 }
 
-aside ul li ul section {
-    width: 15rem;
-    height: auto;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-    align-items: center;
-    gap: 0.2rem;
-}
-
-/*aside ul li ul {
-    display: none;
-}*/
-
-aside ul li:first-of-type ul section:first-of-type {
-    flex-flow: column wrap;
+.menu > .menu-item {
+  margin-bottom: 10px;
 }
 
 .menuButton {
-    width: 15rem;
-    height: 1.5rem;
-    margin: 1rem 0rem;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #ddd;
+  border: none;
+  padding: 10px;
+  width: 150px;
 }
 
-.button {
-    width: 5rem;
-    height: 4rem;
+.submenu {
+  display: none;
+  list-style: none;
+  padding-left: 20px;
+  margin-top: 5px;
 }
 
-aside ul li:first-of-type ul section:first-of-type li button {
-    width: 7.5rem;
-    height: 1.5rem;
+.submenuButton {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 5px;
+  width: 130px;
+  cursor: pointer;
+}
+
+.menu-item.active .submenu {
+  display: block;
 }
 
 /* FOOTER */
 
 footer {
-    grid-area: footer;
-    background-color: rgb(126, 126, 126);
-    color: white;
-    width: 100%;
-    height: 15vh;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
-    align-content: center;
+  grid-area: footer;
+  background-color: rgb(126, 126, 126);
+  color: white;
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-content: center;
 }
 
 footer div {
-    display: flex;
-    flex-flow: row nowrap;
+  display: flex;
+  flex-flow: row nowrap;
 }
 
 footer div h4 {
-    margin-right: 2rem;
+  margin-right: 2rem;
 }
