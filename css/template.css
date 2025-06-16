@@ -13,7 +13,7 @@
 }
 
 body {
-  background-color: rgb(255, 255, 255);
+  background-image: radial-gradient(rgb(76, 76, 76), rgb(25, 25, 25));
 }
 
 h1,
@@ -65,7 +65,7 @@ ul {
 }
 
 #container {
-  width: 90vw;
+  width: 100vw;
   min-height: 100vh;
   margin: 0 auto;
   display: grid;
@@ -89,9 +89,15 @@ header {
   justify-content: space-between;
 }
 
+header div:nth-child(2) {
+  margin-left: 10rem;
+}
+
 header > div:last-child {
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
+  margin-right: 3rem;
 }
 
 header div a img {
@@ -103,15 +109,32 @@ header div a i {
   font-size: 1.5rem;
 }
 
+#logout {
+  background-color: white;
+  padding: 0.25rem 1rem;
+  margin-right: 1rem;
+}
+
+#logout:hover {
+  background-color: var(--teal);
+}
+
 /* ASIDE */
 
-.menu {
-  list-style: none;
-  padding: 0;
+aside {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+nav {
+  text-align: center;
+  margin-top: 2rem;
 }
 
 .menu > .menu-item {
   margin-bottom: 10px;
+  
 }
 
 .menuButton {
@@ -140,20 +163,121 @@ header div a i {
 
 .menu-item.active .submenu {
   display: block;
+  margin-right: 15px;
 }
+
+/* PLATFORM */
+
+.submenuButton:hover {
+  background-color: var(--teal);
+}
+
+.submenuButton.active {
+  background-color: var(--crimson);
+}
+
+/* GENRES */
+/*
+.horror:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+.horror.active {
+  background-color: rgb(253, 85, 85);
+}
+
+.action:hover {
+  background-color: yellow;
+}
+
+.action.active {
+  background-color: rgb(255, 255, 79);
+}
+
+.adventure:hover {
+  background-color: rgba(255, 132, 0, 0.866);
+}
+
+.adventure.active {
+  background-color: rgb(255, 152, 50);
+}
+
+.rpg:hover {
+  background-color: purple;
+}
+
+.rpg.active {
+  background-color: rgb(131, 43, 131);
+}
+
+/*
+.strategy:hover {
+
+}
+
+.strategy.active {
+  
+}
+
+.shooter:hover {
+
+}
+
+.shooter.active {
+  
+}
+
+.sports:hover {
+
+}
+
+.sports.active {
+  
+}
+
+.fighting:hover {
+
+}
+
+.fighting.active {
+  
+}
+
+.racing:hover {
+
+}
+
+.racing.active {
+  
+}
+
+.platform:hover {
+
+}
+
+.platform.active {
+  
+}
+
+.puzzle:hover {
+
+}
+
+.puzzle.active {
+  
+}*/
 
 /* FOOTER */
 
 footer {
   grid-area: footer;
-  background-color: rgb(126, 126, 126);
-  color: white;
   width: 100%;
   height: 15vh;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
   align-content: center;
+  background-image: linear-gradient(90deg, var(--teal) 0%, crimson);
 }
 
 footer div {

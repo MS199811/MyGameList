@@ -30,7 +30,7 @@ require('includes/functions.php');
                 <p>Here's a quick introduction as how to use this site.</p>
                 <ul>
                     <li>- Search for games by sorting them!</li>
-                    <li>- Like games!</li>
+                    <li>- And that's it..! For now.</li>
                 </ul>
             </section>
             <section>
@@ -38,22 +38,21 @@ require('includes/functions.php');
                 <div id="trending" name="trending">
                     <?php createTrending($dbh) ?>
                 </div>
-                <button id="more-trending">More Trending</button>
+                <button class="action-button more-trending" data-function="getTrending">More Trending</button>
             </section>
             <section>
                 <h3>Latest</h3>
-                <hr>
                 <div id="latest">
                     <?php createLatest($dbh) ?>
                 </div>
-                <button id="more-latest">More Latest</button>
+                <button class="action-button more-latest" data-function="getLatest">More Latest</button>
             </section>
             <section>
                 <h3>Upcoming</h3>
                 <div id="upcoming">
                     <?php createUpcoming($dbh) ?>
                 </div>
-                <button id="more-upcoming">More Upcoming</button>
+                <button class="action-button more-upcoming" data-function="getUpcoming">More Upcoming</button>
             </section>
         </main>
         <?php include_once('includes/footer.html'); ?>

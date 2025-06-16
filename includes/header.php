@@ -16,7 +16,7 @@
         ?>
     
         <form action="<?=htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
-            <input type="submit" name="logout" value="Log-Out">
+            <input type="submit" name="logout" value="Log-Out" id="logout">
         </form>
     
         <?php

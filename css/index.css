@@ -27,6 +27,14 @@ main section:first-child {
     grid-column: 1 / 4;
 }
 
+main section:first-child h2 {
+    margin-bottom: 0.5rem;
+}
+
+main section:first-child ul {
+    margin-top: 1rem;
+}
+
 main section div {
     display: flex;
     flex-flow: column wrap;
@@ -42,7 +50,13 @@ main section div article {
 
 main figure {
     padding: 0.5rem;
-    background-color: cyan;
+    background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(123, 123, 123));
+    border: 2px solid black;
+    box-shadow: 0px 0px 10px white;
+}
+
+main figure:hover {
+   transform: scale(1.05);
 }
 
 main figure img {

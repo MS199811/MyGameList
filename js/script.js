@@ -9,3 +9,12 @@ const menuButtons = document.querySelectorAll('.menuButton');
             parentLi.classList.toggle('active');
     });
 });
+
+const submenuButtons = document.querySelectorAll('.submenuButton');
+
+submenuButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Toggle the 'active' class on the clicked submenu button
+        button.classList.toggle('active');
+    });
+});

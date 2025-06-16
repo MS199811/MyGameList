@@ -18,7 +18,7 @@ function createTrending($dbh) {
 
 function createLatest($dbh) {
     $latestGames = $dbh->query("SELECT * FROM mgt_games
-    WHERE release_date < CURDATE() 
+    WHERE release_date <= CURDATE() 
     ORDER BY release_date DESC 
     LIMIT 5");
 

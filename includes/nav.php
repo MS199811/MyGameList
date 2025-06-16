@@ -26,10 +26,10 @@ function createMenu(array $menuArray) {
     $html = '<ul class="menu">';
     foreach($menuArray as $subMenu => $subMenuContent) {
         $html .= '<li class="menu-item">';
-        $html .= '<button class="menuButton">' . htmlspecialchars($subMenu) . '</button>';
+        $html .= '<button class="menuButton">' . strtolower(htmlspecialchars($subMenu)) . '</button>';
         $html .= '<ul class="submenu">';
         foreach($subMenuContent as $item) {
-            $html .= '<li><button class="submenuButton">' . htmlspecialchars($item) . '</button></li>';
+            $html .= '<li><button class="submenuButton '.strtolower(htmlspecialchars($item)).'">' . htmlspecialchars($item) . '</button></li>';
         }
         $html .= '</ul>';
         $html .= '</li>';

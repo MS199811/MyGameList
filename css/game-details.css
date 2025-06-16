@@ -54,14 +54,14 @@ main div section:first-child {
 }
 
 main div section:first-child a i {
-    background-color: rgba(0, 0, 255, 0.356);
+    background-image: linear-gradient(to bottom, lightgray, var(--dim-gray));
     font-size: 2rem;
     padding: 1rem;
 }
 
 main #block1 #game-media, main #block1 #game-info {
     height: 95%;
-    background-color: #29df2954;
+    background-image: linear-gradient(to bottom, lightgray, var(--dim-gray));
     justify-content: center;
     align-content: center;
 }
@@ -72,7 +72,12 @@ main #block1 #game-media {
 
 main #block1 #game-info {
     width: 50%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
 }
+
 
 /* GAME SELECTION WHEEL */
 
