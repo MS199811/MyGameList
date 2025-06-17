@@ -21,18 +21,27 @@ if (isset($_GET['game_id'])) {
         //echo '</pre>';
 
         $gameName = $game['name'];
+
         $gameDescription = $game['description'];
-        $gameReleaseDate = $game['release_date'];
+       
+        if (!$game['release_date'] == null) {
+            $gameReleaseDate = $game['release_date'];
+        } else {
+            $gameReleaseDate = 'UNKNOWN';
+        }
+
         if ($game['available_online'] == 1) {
             $gameOnline = 'Yes';
         } else {
             $gameOnline = 'No';
         }
+
         if ($game['crossplay'] == 1) {
             $gameCrossplay = 'Yes';
         } else {
             $gameCrossplay = 'No';
         }
+        
         $gameImgSrc = $game['img_src'];
     }
 

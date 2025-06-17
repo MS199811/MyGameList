@@ -33,11 +33,11 @@ main #block1 {
 
 table, th, td {
     border-collapse: collapse;
-    padding: 1rem;
+    padding: 2rem;
 }
 
 table, td {
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 main #block2 {
@@ -61,7 +61,7 @@ main div section:first-child a i {
 
 main #block1 #game-media, main #block1 #game-info {
     height: 95%;
-    background-image: linear-gradient(to bottom, lightgray, var(--dim-gray));
+
     justify-content: center;
     align-content: center;
 }
@@ -70,12 +70,22 @@ main #block1 #game-media {
     width: 30%;
 }
 
+main #block1 #game-media img {
+    padding: 0.5rem;
+    background-image: linear-gradient(to bottom, lightgray, var(--dim-gray));
+    box-shadow: 0px 0px 10px white;
+}
+
 main #block1 #game-info {
     width: 50%;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
+}
+
+main #block1 #game-info table {
+    background-image: linear-gradient(to bottom, lightgray, var(--dim-gray));
 }
 
 
